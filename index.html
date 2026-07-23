@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henivet Pharma - Natural Homeopathic Medicine for Livestock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header with Contact Buttons -->
+    <div class="header">
+        <div class="header-content">
+            <a href="#" class="logo" data-lang="header_logo">🐾 Henivet Pharma</a>
+            <div class="header-tagline" data-lang="header_tagline">Natural Homeopathic Care for Your Livestock</div>
+            <div class="header-icons">
+                <a href="tel:+919876543210" class="contact-btn call-btn" data-lang="header_call">📞 Call Now</a>
+                <a href="https://wa.me/919876543210" class="contact-btn whatsapp-btn" target="_blank" data-lang="header_whatsapp">💬 WhatsApp</a>
+                <a href="mailto:henivetpharma@gmail.com" class="contact-btn email-btn" data-lang="header_email">📩 Email</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-menu">
+        <div class="nav-content">
+            <a href="#home" class="nav-item" data-lang="nav_home">🏠 Home</a>
+            <a href="#products" class="nav-item" data-lang="nav_products">💊 Products</a>
+            <a href="#gallery" class="nav-item" data-lang="nav_gallery">🖼️ Gallery</a>
+            <a href="#about" class="nav-item" data-lang="nav_about">👨‍⚕️ About Us</a>
+            <a href="#reviews" class="nav-item" data-lang="nav_reviews">⭐ Reviews</a>
+            <a href="#contact" class="nav-item" data-lang="nav_contact">📞 Contact</a>
+            <div class="lang-switcher">
+                <button class="lang-toggle-btn" onclick="toggleLangDropdown()">🇮🇳 हिन्दी</button>
+                <div class="lang-dropdown">
+                    <button class="lang-option" onclick="setLanguage('en')">
+                        <span class="lang-flag">🇬🇧</span> English
+                    </button>
+                    <button class="lang-option" onclick="setLanguage('hi')">
+                        <span class="lang-flag">🇮🇳</span> हिन्दी
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="banner" id="home">
+        <div class="banner-content">
+            <h1 data-lang="hero_title">Healthy Animals, Happy Farmers</h1>
+            <p data-lang="hero_desc1">We provide safe and effective homeopathic medicines for cows, buffalo, and goats.</p>
+            <p data-lang="hero_desc2">Our medicines help improve health, increase milk production, and treat common diseases naturally.</p>
+            <div class="banner-buttons">
+                <a href="tel:+919876543210" class="banner-btn call-btn" data-lang="hero_call">📞 Call Now</a>
+                <a href="https://wa.me/919876543210" class="banner-btn whatsapp-btn" target="_blank" data-lang="hero_whatsapp">💬 WhatsApp Us</a>
+                <a href="mailto:henivetpharma@gmail.com" class="banner-btn email-btn" data-lang="hero_email">📩 Email Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Slider Section -->
+    <div class="image-slider">
+        <div class="slider-container">
+            <div class="slider-track">
+                <div class="slider-item">
+                    <img src="About.jpg" alt="Henivet Pharma - About">
+                </div>
+                <div class="slider-item">
+                    <img src="About2.jpg" alt="Henivet Pharma - About 2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div class="why-choose-us">
+        <h2 data-lang="why_title">Why Choose Henivet Pharma?</h2>
+        <div class="why-choose-grid">
+            <div class="why-card">
+                <div class="why-icon">💊</div>
+                <h3 data-lang="why_1_title">100% Homeopathic & Safe</h3>
+                <p data-lang="why_1_desc">All medicines are natural and safe for your animals.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">✅</div>
+                <h3 data-lang="why_2_title">No Side Effects</h3>
+                <p data-lang="why_2_desc">Pure homeopathic formulations with zero harmful chemicals.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">💰</div>
+                <h3 data-lang="why_3_title">Affordable Treatment</h3>
+                <p data-lang="why_3_desc">Cost-effective solutions for farmer-friendly prices.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">👨‍⚕️</div>
+                <h3 data-lang="why_4_title">Experienced Guidance</h3>
+                <p data-lang="why_4_desc">Expert advice from experienced animal care professionals.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🤝</div>
+                <h3 data-lang="why_5_title">Trusted by Farmers</h3>
+                <p data-lang="why_5_desc">Thousands of satisfied farmers across the region.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <h3 data-lang="why_6_title">Quick Services</h3>
+                <p data-lang="why_6_desc">Fast response and quick order delivery.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services-section">
+        <h2 data-lang="services_title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <span class="check-mark">✔</span>
+                <span data-lang="services_1">Fever Treatment</span>
+            </div>
+            <div class="service-item">
+                <span class="check-mark">✔</span>
+                <span data-lang="services_2">Digestion Problems</span>
+            </div>
+            <div class="service-item">
+                <span class="check-mark">✔</span>
+                <span data-lang="services_3">Milk Production Improvement</span>
+            </div>
+            <div class="service-item">
+                <span class="check-mark">✔</span>
+                <span data-lang="services_4">Weakness & Recovery</span>
+            </div>
+            <div class="service-item">
+                <span class="check-mark">✔</span>
+                <span data-lang="services_5">General Health Care</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Medicine Gallery Section -->
+    <div class="medicine-gallery" id="gallery">
+        <h2 data-lang="gallery_title">Our Medicines Gallery</h2>
+        <div class="medicine-grid">
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="actino_fit.jpg" alt="Actino"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_actino">Actinobacillosis Treatment</h3>
+                    <p data-lang="medicine_actino_desc">Effective homeopathic remedy for actinobacillosis (lumpy jaw) in cattle.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="cough_fit.jpg" alt="Cough"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_cough">Cough & Respiratory Care</h3>
+                    <p data-lang="medicine_cough_desc">Provides relief from cough, cold, and respiratory infections in livestock.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="diarrhoea_fit.jpg" alt="Diarrhoea"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_diarrhoea">Diarrhoea Treatment</h3>
+                    <p data-lang="medicine_diarrhoea_desc">Natural remedy for diarrhoea and digestive tract infections in animals.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="ferit_fit.jpg" alt="Fertility"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_ferit">Fertility Booster</h3>
+                    <p data-lang="medicine_ferit_desc">Enhances fertility and reproductive health in cows and buffalo.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="fever_fit.jpg" alt="Fever"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_fever">Fever Relief</h3>
+                    <p data-lang="medicine_fever_desc">Quick and safe relief from fever and associated symptoms.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="fibro_fit.jpg" alt="Fibroma"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_fibro">Fibroma Treatment</h3>
+                    <p data-lang="medicine_fibro_desc">Homeopathic treatment for fibroma and skin growths in animals.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="heatress_fit.jpg" alt="Heat Stress"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_heatress">Heat Stress Relief</h3>
+                    <p data-lang="medicine_heatress_desc">Helps animals cope with heat stress and maintains productivity.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="infertility&amp;repeater(A.I.)fit.jpg" alt="Infertility"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_infertility">Infertility & Repeater (A.I.) Treatment</h3>
+                    <p data-lang="medicine_infertility_desc">Treats infertility issues and improves A.I. success rates.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="liver_fit.jpg" alt="Liver"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_liver">Liver Tonic</h3>
+                    <p data-lang="medicine_liver_desc">Supports liver function and detoxification in livestock.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="masti_fit.jpg" alt="Mastitis"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_masti">Mastitis Treatment</h3>
+                    <p data-lang="medicine_masti_desc">Effective remedy for mastitis and udder health issues.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="milking_fit.jpg" alt="Milking"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_milking">Milking Support</h3>
+                    <p data-lang="medicine_milking_desc">Promotes healthy milk let-down and udder comfort.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="prega_fit.jpg" alt="Pregnancy"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_prega">Pregnancy Care</h3>
+                    <p data-lang="medicine_prega_desc">Supports healthy pregnancy and reduces complications during calving.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="pro_fit.jpg" alt="Prolapse & Weakness"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_pro">Prolapse & Weakness</h3>
+                    <p data-lang="medicine_pro_desc">Helps in prevention and management of prolapse and general weakness.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="prolapse_fit.jpg" alt="Prolapse"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_prolapse">Prolapse Treatment</h3>
+                    <p data-lang="medicine_prolapse_desc">Homeopathic treatment for vaginal and uterine prolapse.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="sarra_fit.jpg" alt="Sarra"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_sarra">Sarra Treatment</h3>
+                    <p data-lang="medicine_sarra_desc">Effective remedy for sarra (surra) disease in livestock.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="skin_fit.jpg" alt="Skin"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_skin">Skin Disease Treatment</h3>
+                    <p data-lang="medicine_skin_desc">Treats various skin conditions and infections in animals.</p>
+                </div>
+            </div>
+            <div class="medicine-card">
+                <div class="medicine-card-img"><img src="uterus_fit.jpg" alt="Uterus"></div>
+                <div class="medicine-card-body">
+                    <h3 data-lang="medicine_uterus">Uterus Health</h3>
+                    <p data-lang="medicine_uterus_desc">Promotes uterine health and normal reproductive function.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="products-container" id="products">
+        <h2 class="section-title" data-lang="products_title">Our Medicines</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🥛</div>
+                <div class="product-details">
+                    <h3 class="product-name" data-lang="product_1_name">Milk Booster Drops</h3>
+                    <p class="product-description" data-lang="product_1_desc">Improves milk production in cows and buffalo. Helps in increasing strength and overall health.</p>
+                    <div class="product-buttons">
+                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
+                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌡️</div>
+                <div class="product-details">
+                    <h3 class="product-name" data-lang="product_2_name">Fever Relief Medicine</h3>
+                    <p class="product-description" data-lang="product_2_desc">Effective treatment for fever and infections in animals. Works quickly and safely.</p>
+                    <div class="product-buttons">
+                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
+                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">💧</div>
+                <div class="product-details">
+                    <h3 class="product-name" data-lang="product_3_name">Digestion Tonic</h3>
+                    <p class="product-description" data-lang="product_3_desc">Used for indigestion, gas, and stomach problems. Improves appetite and digestion.</p>
+                    <div class="product-buttons">
+                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
+                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">💪</div>
+                <div class="product-details">
+                    <h3 class="product-name" data-lang="product_4_name">General Health Tonic</h3>
+                    <p class="product-description" data-lang="product_4_desc">Boosts immunity and overall health of animals. Suitable for cows, buffalo, and goats.</p>
+                    <div class="product-buttons">
+                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
+                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- About Us Section -->
+    <div class="about-section" id="about">
+        <h2 data-lang="about_title">About Henivet Pharma</h2>
+        <div class="about-content">
+            <p data-lang="about_desc1">Henivet Pharma is dedicated to providing high-quality homeopathic medicines for animals.</p>
+            <p data-lang="about_desc2">With years of experience in animal care, we focus on natural and safe treatment methods for cows, buffalo, and goats. Our goal is to help farmers maintain healthy livestock without harmful chemicals.</p>
+            <p data-lang="about_desc3">We believe that healthy animals lead to better productivity and a better life for farmers.</p>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section" id="reviews">
+        <h2 data-lang="reviews_title">What Our Customers Say</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text" data-lang="review_1_text">"My cow recovered from fever within 2 days. Very effective medicine."</p>
+                <p class="review-author" data-lang="review_1_author">- Farmer Rajesh</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text" data-lang="review_2_text">"Milk production increased after using their medicine. Highly recommended."</p>
+                <p class="review-author" data-lang="review_2_author">- Farmer Vikram</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text" data-lang="review_3_text">"Affordable and safe treatment for animals. Good service."</p>
+                <p class="review-author" data-lang="review_3_author">- Farmer Suresh</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section" id="contact">
+        <h2 data-lang="contact_title">Contact Us / Order Medicine</h2>
+        <p data-lang="contact_subtitle">To order medicine or get advice, contact us directly.</p>
+        
+        <div class="contact-info">
+            <div class="contact-method">
+                <h3 data-lang="contact_phone_title">📞 Phone</h3>
+                <p><a href="tel:+919876543210" data-lang="contact_phone">Call: +91-9876543210</a></p>
+            </div>
+            
+            <div class="contact-method">
+                <h3 data-lang="contact_whatsapp_title">💬 WhatsApp</h3>
+                <p><a href="https://wa.me/919876543210" target="_blank" data-lang="contact_whatsapp">WhatsApp: +91-9876543210</a></p>
+            </div>
+            
+            <div class="contact-method">
+                <h3 data-lang="contact_email_title">📩 Email</h3>
+                <p><a href="mailto:henivetpharma@gmail.com" data-lang="contact_email">henivetpharma@gmail.com</a></p>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h3 data-lang="contact_form_title">Send us a Message</h3>
+            <form onsubmit="handleFormSubmit(event)">
+                <input type="text" id="name" data-lang="form_name_placeholder" placeholder="Your Name" required>
+                <input type="tel" id="phone" data-lang="form_phone_placeholder" placeholder="Phone Number" required>
+                <select id="animal" required>
+                    <option value="" data-lang="form_animal_label">Select Animal Type</option>
+                    <option value="Cow" data-lang="form_animal_cow">Cow</option>
+                    <option value="Buffalo" data-lang="form_animal_buffalo">Buffalo</option>
+                    <option value="Goat" data-lang="form_animal_goat">Goat</option>
+                </select>
+                <textarea id="problem" data-lang="form_problem_placeholder" placeholder="Problem / बीमारी" rows="4" required></textarea>
+                <button type="submit" class="submit-btn" data-lang="form_submit">👉 Submit & We Will Contact You</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-lang="footer_brand">🐾 Henivet Pharma</h3>
+                <p data-lang="footer_tagline">Natural Animal Homeopathy</p>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-lang="footer_contact_title">📞 Contact Info</h3>
+                <ul>
+                    <li><a href="tel:+919876543210" data-lang="footer_phone">Phone: +91-9876543210</a></li>
+                    <li><a href="mailto:henivetpharma@gmail.com" data-lang="footer_email">Email: henivetpharma@gmail.com</a></li>
+                    <li><a href="https://wa.me/919876543210" target="_blank" data-lang="footer_whatsapp_link">💬 Follow us on WhatsApp</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-lang="footer_serve_title">🐄 We Serve</h3>
+                <ul>
+                    <li data-lang="footer_serve_1">Cow Care</li>
+                    <li data-lang="footer_serve_2">Buffalo Care</li>
+                    <li data-lang="footer_serve_3">Goat Care</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-lang="footer_animals_title">📌 Animal Types</h3>
+                <ul>
+                    <li data-lang="footer_animal_1">Cows</li>
+                    <li data-lang="footer_animal_2">Buffalo</li>
+                    <li data-lang="footer_animal_3">Goats</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p data-lang="footer_copyright">&copy; 2026 Henivet Pharma - Natural Homeopathic Medicine for Livestock. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float">
+        <span>💬</span>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
