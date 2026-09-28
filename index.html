@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Henivet Pharma - Natural Homeopathic Medicine for Livestock</title>
+    <meta name="description" content="Henivet Pharma provides homeopathic veterinary medicines and animal care for cows, buffaloes, and goats. Browse products and place an order online.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://henivetpharma.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Henivet Pharma - Animal Healthcare">
+    <meta property="og:description" content="Browse animal healthcare products from Henivet Pharma.">
+    <meta property="og:url" content="https://henivetpharma.com/">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Henivet Pharma",
+            "url": "https://henivetpharma.com/",
+            "email": "henivetpharma@gmail.com",
+            "telephone": "+91-9876543210"
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +32,6 @@
             <div class="header-icons">
                 <a href="tel:+919876543210" class="contact-btn call-btn" data-lang="header_call">📞 Call Now</a>
                 <a href="https://wa.me/919876543210" class="contact-btn whatsapp-btn" target="_blank" data-lang="header_whatsapp">💬 WhatsApp</a>
-                <a href="mailto:henivetpharma@gmail.com" class="contact-btn email-btn" data-lang="header_email">📩 Email</a>
             </div>
         </div>
     </div>
@@ -23,12 +39,10 @@
     <!-- Navigation -->
     <div class="nav-menu">
         <div class="nav-content">
-            <a href="#home" class="nav-item" data-lang="nav_home">🏠 Home</a>
-            <a href="#products" class="nav-item" data-lang="nav_products">💊 Products</a>
-            <a href="#gallery" class="nav-item" data-lang="nav_gallery">🖼️ Gallery</a>
-            <a href="#about" class="nav-item" data-lang="nav_about">👨‍⚕️ About Us</a>
-            <a href="#reviews" class="nav-item" data-lang="nav_reviews">⭐ Reviews</a>
-            <a href="#contact" class="nav-item" data-lang="nav_contact">📞 Contact</a>
+            <a href="#home" class="nav-item" data-lang="nav_home">HOME</a>
+            <a href="#about" class="nav-item" data-lang="nav_about">ABOUT US</a>
+            <a href="#products" class="nav-item" data-lang="nav_products">PRODUCTS</a>
+            <a href="#contact" class="nav-item" data-lang="nav_contact">CONTACT US</a>
             <div class="lang-switcher">
                 <button class="lang-toggle-btn" onclick="toggleLangDropdown()">🇮🇳 हिन्दी</button>
                 <div class="lang-dropdown">
@@ -40,7 +54,36 @@
                     </button>
                 </div>
             </div>
+            <a class="nav-item profile-nav-link" id="profile-nav-link" href="user_login/index.html" aria-label="Login or open your profile" title="Profile">
+                <span class="profile-icon" id="profile-icon" aria-hidden="true">P</span>
+            </a>
         </div>
+    </div>
+
+    <div class="product-modal" id="product-modal" hidden>
+        <section class="product-dialog" role="dialog" aria-modal="true" aria-labelledby="product-title">
+            <button type="button" class="product-close" data-close-product aria-label="Close product details">&times;</button>
+            <div class="product-detail-heading">
+                <h2 id="product-title"></h2>
+                <img id="product-image" src="" alt="">
+            </div>
+            <div class="product-detail-copy">
+                <h3>About this medicine</h3>
+                <p id="product-description"></p>
+                <h3>Dosage and use</h3>
+                <p id="product-dosage">Use only as directed on the product label or by a qualified veterinarian. Dosage depends on the animal and condition; contact Henivet Pharma for product-specific guidance.</p>
+            </div>
+            <p class="form-status" id="product-status" role="status" aria-live="polite"></p>
+            <div class="product-actions">
+                <div class="quantity-control" aria-label="Product quantity">
+                    <button type="button" id="quantity-decrease" aria-label="Decrease quantity">−</button>
+                    <output id="product-quantity" aria-live="polite">1</output>
+                    <button type="button" id="quantity-increase" aria-label="Increase quantity">+</button>
+                </div>
+                <button type="button" class="cart-add-btn" id="add-to-cart">Add to Cart</button>
+                <button type="button" class="direct-order-btn" id="direct-order">Direct Order</button>
+            </div>
+        </section>
     </div>
 
     <!-- Hero Banner -->
@@ -52,21 +95,6 @@
             <div class="banner-buttons">
                 <a href="tel:+919876543210" class="banner-btn call-btn" data-lang="hero_call">📞 Call Now</a>
                 <a href="https://wa.me/919876543210" class="banner-btn whatsapp-btn" target="_blank" data-lang="hero_whatsapp">💬 WhatsApp Us</a>
-                <a href="mailto:henivetpharma@gmail.com" class="banner-btn email-btn" data-lang="hero_email">📩 Email Us</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Image Slider Section -->
-    <div class="image-slider">
-        <div class="slider-container">
-            <div class="slider-track">
-                <div class="slider-item">
-                    <img src="About.jpg" alt="Henivet Pharma - About">
-                </div>
-                <div class="slider-item">
-                    <img src="About2.jpg" alt="Henivet Pharma - About 2">
-                </div>
             </div>
         </div>
     </div>
@@ -137,8 +165,8 @@
 
 
     <!-- Medicine Gallery Section -->
-    <div class="medicine-gallery" id="gallery">
-        <h2 data-lang="gallery_title">Our Medicines Gallery</h2>
+    <div class="medicine-gallery" id="products">
+        <h2 data-lang="products_title">Products</h2>
         <div class="medicine-grid">
             <div class="medicine-card">
                 <div class="medicine-card-img"><img src="actino_fit.jpg" alt="Actino"></div>
@@ -262,61 +290,6 @@
         </div>
     </div>
 
-    <!-- Products Section -->
-    <div class="products-container" id="products">
-        <h2 class="section-title" data-lang="products_title">Our Medicines</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image">🥛</div>
-                <div class="product-details">
-                    <h3 class="product-name" data-lang="product_1_name">Milk Booster Drops</h3>
-                    <p class="product-description" data-lang="product_1_desc">Improves milk production in cows and buffalo. Helps in increasing strength and overall health.</p>
-                    <div class="product-buttons">
-                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
-                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">🌡️</div>
-                <div class="product-details">
-                    <h3 class="product-name" data-lang="product_2_name">Fever Relief Medicine</h3>
-                    <p class="product-description" data-lang="product_2_desc">Effective treatment for fever and infections in animals. Works quickly and safely.</p>
-                    <div class="product-buttons">
-                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
-                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">💧</div>
-                <div class="product-details">
-                    <h3 class="product-name" data-lang="product_3_name">Digestion Tonic</h3>
-                    <p class="product-description" data-lang="product_3_desc">Used for indigestion, gas, and stomach problems. Improves appetite and digestion.</p>
-                    <div class="product-buttons">
-                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
-                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">💪</div>
-                <div class="product-details">
-                    <h3 class="product-name" data-lang="product_4_name">General Health Tonic</h3>
-                    <p class="product-description" data-lang="product_4_desc">Boosts immunity and overall health of animals. Suitable for cows, buffalo, and goats.</p>
-                    <div class="product-buttons">
-                        <a href="tel:+919876543210" class="order-btn" data-lang="order_call">📞 Call to Order</a>
-                        <a href="https://wa.me/919876543210" class="order-btn whatsapp" target="_blank" data-lang="order_whatsapp">💬 WhatsApp to Order</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- About Us Section -->
     <div class="about-section" id="about">
         <h2 data-lang="about_title">About Henivet Pharma</h2>
@@ -330,6 +303,19 @@
     <!-- Reviews Section -->
     <div class="reviews-section" id="reviews">
         <h2 data-lang="reviews_title">What Our Customers Say</h2>
+        <button type="button" class="review-toggle-btn" id="review-toggle" aria-expanded="false" aria-controls="review-form" data-lang="review_button">Write a Review</button>
+        <form class="review-form" id="review-form" hidden>
+            <input type="text" id="review-name" data-lang="review_name_placeholder" placeholder="Your Name" maxlength="60" required>
+            <select id="review-rating" aria-label="Rating" required>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
+            <textarea id="review-message" data-lang="review_message_placeholder" placeholder="Write your review" rows="4" maxlength="500" required></textarea>
+            <button type="submit" class="submit-btn" data-lang="review_submit">Submit Review</button>
+        </form>
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
@@ -357,12 +343,12 @@
         <div class="contact-info">
             <div class="contact-method">
                 <h3 data-lang="contact_phone_title">📞 Phone</h3>
-                <p><a href="tel:+919876543210" data-lang="contact_phone">Call: +91-9876543210</a></p>
+                <p><a href="tel:+919889501444" data-lang="contact_phone">Call: +91-9889501444</a></p>
             </div>
             
             <div class="contact-method">
                 <h3 data-lang="contact_whatsapp_title">💬 WhatsApp</h3>
-                <p><a href="https://wa.me/919876543210" target="_blank" data-lang="contact_whatsapp">WhatsApp: +91-9876543210</a></p>
+                <p><a href="https://wa.me/+919889501444" target="_blank" data-lang="contact_whatsapp">WhatsApp: +91 9889501444</a></p>
             </div>
             
             <div class="contact-method">
@@ -373,9 +359,12 @@
 
         <div class="contact-form">
             <h3 data-lang="contact_form_title">Send us a Message</h3>
-            <form onsubmit="handleFormSubmit(event)">
+            <form id="order-form">
                 <input type="text" id="name" data-lang="form_name_placeholder" placeholder="Your Name" required>
-                <input type="tel" id="phone" data-lang="form_phone_placeholder" placeholder="Phone Number" required>
+                <label class="order-phone-label" id="order-phone-label"></label>
+                <select id="medicine" required>
+                    <option value="" data-lang="form_medicine_label">Select Medicine</option>
+                </select>
                 <select id="animal" required>
                     <option value="" data-lang="form_animal_label">Select Animal Type</option>
                     <option value="Cow" data-lang="form_animal_cow">Cow</option>
@@ -383,10 +372,12 @@
                     <option value="Goat" data-lang="form_animal_goat">Goat</option>
                 </select>
                 <textarea id="problem" data-lang="form_problem_placeholder" placeholder="Problem / बीमारी" rows="4" required></textarea>
-                <button type="submit" class="submit-btn" data-lang="form_submit">👉 Submit & We Will Contact You</button>
+                <button type="submit" class="submit-btn" data-lang="form_submit">Submit Order Request</button>
+                <p class="form-status" id="order-status" role="status" aria-live="polite"></p>
             </form>
         </div>
     </div>
+
     <div class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -397,9 +388,9 @@
             <div class="footer-section">
                 <h3 data-lang="footer_contact_title">📞 Contact Info</h3>
                 <ul>
-                    <li><a href="tel:+919876543210" data-lang="footer_phone">Phone: +91-9876543210</a></li>
+                    <li><a href="tel:+919889501444" data-lang="footer_phone">Phone: +91-9889501444</a></li>
                     <li><a href="mailto:henivetpharma@gmail.com" data-lang="footer_email">Email: henivetpharma@gmail.com</a></li>
-                    <li><a href="https://wa.me/919876543210" target="_blank" data-lang="footer_whatsapp_link">💬 Follow us on WhatsApp</a></li>
+                    <li><a href="https://wa.me/919889501444" target="_blank" data-lang="footer_whatsapp_link">💬 Follow us on WhatsApp</a></li>
                 </ul>
             </div>
 
@@ -428,10 +419,11 @@
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/919889501444" target="_blank" class="whatsapp-float">
         <span>💬</span>
     </a>
 
     <script src="script.js"></script>
+    <script type="module" src="site-auth.js"></script>
 </body>
 </html>

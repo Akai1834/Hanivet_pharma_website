@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['displayName', 'phoneNumber', 'loginTime'])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 60
+        && request.resource.data.phoneNumber == request.auth.token.phone_number
+        && request.resource.data.loginTime == request.time;
+      allow update: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['displayName', 'phoneNumber', 'loginTime', 'createdAt', 'updatedAt'])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 60
+        && request.resource.data.phoneNumber == request.auth.token.phone_number
+        && request.resource.data.loginTime == request.time
+        && (!('createdAt' in resource.data) || request.resource.data.createdAt == resource.data.createdAt)
+        && (!('updatedAt' in resource.data) || request.resource.data.updatedAt == resource.data.updatedAt);
+      allow delete: if false;
+    }
+
+    match /orders/{orderId} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'phoneNumber', 'medicine', 'animal', 'problem', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.phoneNumber == request.auth.token.phone_number
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.medicine is string
+        && request.resource.data.medicine.size() <= 120
+        && request.resource.data.animal in ['Cow', 'Buffalo', 'Goat']
+        && request.resource.data.problem is string
+        && request.resource.data.problem.size() <= 1000
+        && request.resource.data.createdAt == request.time;
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'rating', 'message', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 500
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+  }
+}

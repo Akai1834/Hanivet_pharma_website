@@ -2,12 +2,20 @@
 const translations = {
     en: {
         // Nav
-        nav_home: '🏠 Home',
-        nav_products: '💊 Products',
-        nav_gallery: '🖼️ Gallery',
-        nav_about: '👨‍⚕️ About Us',
-        nav_reviews: '⭐ Reviews',
-        nav_contact: '📞 Contact',
+        nav_home: 'HOME',
+        nav_products: 'PRODUCTS',
+        nav_about: 'ABOUT US',
+        nav_contact: 'CONTACT US',
+        nav_login: 'LOGIN',
+        nav_logout: 'LOG OUT',
+        order_medicine: 'Order this medicine',
+        login_title: 'Login with your phone',
+        login_description: 'We will send a one-time code by SMS.',
+        login_phone_label: 'Phone number',
+        login_send_code: 'Send OTP',
+        login_otp_label: 'Enter the SMS code',
+        login_verify: 'Verify and login',
+        form_medicine_label: 'Select Medicine',
 
         // Header
         header_logo: '🐾 Henivet Pharma',
@@ -51,7 +59,7 @@ const translations = {
         gallery_title: 'Our Medicines Gallery',
 
         // Products
-        products_title: 'Our Medicines',
+        products_title: 'Products',
         product_1_name: 'Milk Booster Drops',
         product_1_desc: 'Improves milk production in cows and buffalo. Helps in increasing strength and overall health.',
         product_2_name: 'Fever Relief Medicine',
@@ -77,6 +85,10 @@ const translations = {
         review_2_author: '- Farmer Vikram',
         review_3_text: '"Affordable and safe treatment for animals. Good service."',
         review_3_author: '- Farmer Suresh',
+        review_button: 'Write a Review',
+        review_name_placeholder: 'Your Name',
+        review_message_placeholder: 'Write your review',
+        review_submit: 'Submit Review',
 
         // Contact
         contact_title: 'Contact Us / Order Medicine',
@@ -156,12 +168,20 @@ const translations = {
 
     hi: {
         // Nav
-        nav_home: '🏠 होम',
-        nav_products: '💊 उत्पाद',
-        nav_gallery: '🖼️ गैलरी',
-        nav_about: '👨‍⚕️ हमारे बारे में',
-        nav_reviews: '⭐ समीक्षाएँ',
-        nav_contact: '📞 संपर्क',
+        nav_home: 'होम',
+        nav_products: 'उत्पाद',
+        nav_about: 'हमारे बारे में',
+        nav_contact: 'संपर्क करें',
+        nav_login: 'लॉगिन',
+        nav_logout: 'लॉगआउट',
+        order_medicine: 'यह दवा ऑर्डर करें',
+        login_title: 'फोन से लॉगिन करें',
+        login_description: 'हम SMS से एक बार इस्तेमाल होने वाला कोड भेजेंगे।',
+        login_phone_label: 'फोन नंबर',
+        login_send_code: 'OTP भेजें',
+        login_otp_label: 'SMS कोड दर्ज करें',
+        login_verify: 'सत्यापित करें और लॉगिन करें',
+        form_medicine_label: 'दवा चुनें',
 
         // Header
         header_logo: '🐾 हेनिवेट फार्मा',
@@ -205,7 +225,7 @@ const translations = {
         gallery_title: 'हमारी दवाओं की गैलरी',
 
         // Products
-        products_title: 'हमारी दवाएं',
+        products_title: 'उत्पाद',
         product_1_name: 'दूध बूस्टर ड्रॉप्स',
         product_1_desc: 'गाय और भैंस में दूध उत्पादन में सुधार करता है। ताकत और समग्र स्वास्थ्य बढ़ाने में मदद करता है।',
         product_2_name: 'बुखार राहत दवा',
@@ -231,6 +251,10 @@ const translations = {
         review_2_author: '- किसान विक्रम',
         review_3_text: '"जानवरों के लिए किफायती और सुरक्षित इलाज। अच्छी सेवा।"',
         review_3_author: '- किसान सुरेश',
+        review_button: 'समीक्षा लिखें',
+        review_name_placeholder: 'आपका नाम',
+        review_message_placeholder: 'अपनी समीक्षा लिखें',
+        review_submit: 'समीक्षा भेजें',
 
         // Contact
         contact_title: 'संपर्क करें / दवा ऑर्डर करें',
@@ -314,6 +338,7 @@ let currentLang = 'en';
 function setLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('henivet_lang', lang);
+    document.documentElement.lang = lang;
 
     // Update all elements with data-lang attribute
     document.querySelectorAll('[data-lang]').forEach(el => {
@@ -352,6 +377,7 @@ function setLanguage(lang) {
     if (dropdown) {
         dropdown.classList.remove('show');
     }
+    document.dispatchEvent(new Event('languagechange'));
 }
 
 function toggleLangDropdown() {
@@ -414,7 +440,70 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load saved language
     const savedLang = localStorage.getItem('henivet_lang') || 'en';
     setLanguage(savedLang);
+
+    const medicineSelect = document.getElementById('medicine');
+    document.querySelectorAll('.medicine-card').forEach(card => {
+        const medicineName = card.querySelector('h3')?.textContent.trim();
+        if (!medicineName) return;
+
+        const option = document.createElement('option');
+        option.value = medicineName;
+        option.textContent = medicineName;
+        medicineSelect.append(option);
+
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-haspopup', 'dialog');
+    });
+
+    const reviewToggle = document.getElementById('review-toggle');
+    const reviewForm = document.getElementById('review-form');
+    const reviewsGrid = document.querySelector('.reviews-grid');
+    const savedReviews = [];
+
+    reviewToggle.addEventListener('click', function() {
+        reviewForm.hidden = !reviewForm.hidden;
+        reviewToggle.setAttribute('aria-expanded', String(!reviewForm.hidden));
+        if (!reviewForm.hidden) {
+            document.getElementById('review-name').focus();
+        }
+    });
+
+    reviewForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const review = {
+            name: document.getElementById('review-name').value.trim(),
+            rating: Number(document.getElementById('review-rating').value),
+            message: document.getElementById('review-message').value.trim()
+        };
+        if (!review.name || !review.message) return;
+
+        document.dispatchEvent(new CustomEvent('henivet:review-submit', { detail: review }));
+        reviewForm.reset();
+        reviewForm.hidden = true;
+        reviewToggle.setAttribute('aria-expanded', 'false');
+    });
     
     console.log('Henivet Pharma website loaded successfully!');
 });
+
+function addCustomerReview(review, reviewsGrid) {
+    const card = document.createElement('article');
+    card.className = 'review-card';
+
+    const stars = document.createElement('div');
+    stars.className = 'review-stars';
+    stars.textContent = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+
+    const message = document.createElement('p');
+    message.className = 'review-text';
+    message.textContent = `"${review.message}"`;
+
+    const author = document.createElement('p');
+    author.className = 'review-author';
+    author.textContent = `- ${review.name}`;
+
+    card.append(stars, message, author);
+    reviewsGrid.append(card);
+}
 

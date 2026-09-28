@@ -1,0 +1,68 @@
+* { box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: #eef4ed;
+    color: #243328;
+    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+
+button, input { font: inherit; }
+[hidden] { display: none !important; }
+
+.account-layout { width: min(100% - 32px, 920px); margin: 0 auto; padding: 28px 0 24px; }
+.account-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.account-brand { color: #245e2b; font-size: 22px; font-weight: 800; text-decoration: none; }
+.back-link, .browse-link { color: #286b32; font-weight: 700; text-decoration: none; }
+.back-link:hover, .browse-link:hover { text-decoration: underline; }
+.account-panel { padding: clamp(22px, 5vw, 42px); background: #fff; border-top: 5px solid #2d7b2d; border-radius: 6px; box-shadow: 0 14px 38px rgba(32, 65, 36, 0.12); }
+.eyebrow { margin: 0 0 8px; color: #547b4e; font-size: 11px; font-weight: 800; }
+.account-panel h1 { margin: 0; color: #214f28; font-size: clamp(24px, 5vw, 32px); }
+.intro-copy { max-width: 560px; margin: 10px 0 28px; color: #59665b; line-height: 1.5; }
+.account-panel form { max-width: 460px; }
+.account-panel label { display: block; margin: 16px 0 7px; font-size: 14px; font-weight: 700; }
+.account-panel input { width: 100%; min-height: 46px; padding: 11px 12px; border: 1px solid #c8d3c9; border-radius: 4px; background: #fff; }
+.account-panel input:focus { outline: 2px solid #57934d; outline-offset: 1px; }
+.phone-field { display: flex; }
+.phone-field span { display: grid; min-width: 60px; place-items: center; border: 1px solid #c8d3c9; border-right: 0; border-radius: 4px 0 0 4px; background: #f1f6f0; font-weight: 700; }
+.phone-field input { border-radius: 0 4px 4px 0; }
+.account-panel small { display: block; margin-top: 6px; color: #667266; }
+#recaptcha-container { display: flex; min-height: 78px; justify-content: flex-start; margin: 18px 0 12px; }
+.primary-button { width: 100%; min-height: 46px; padding: 10px 14px; border: 0; border-radius: 4px; background: #286b32; color: #fff; font-weight: 800; cursor: pointer; }
+.primary-button:hover:not(:disabled) { background: #1d5626; }
+.primary-button:disabled { opacity: .55; cursor: wait; }
+.text-button { border: 0; background: transparent; color: #286b32; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.status-message { min-height: 22px; margin: 14px 0 0; color: #286b32; font-size: 14px; }
+.status-message[data-error="true"] { color: #ad3027; }
+.profile-heading { display: flex; align-items: center; gap: 15px; padding: 4px 0 24px; border-bottom: 1px solid #e2e9e2; }
+.profile-avatar { display: grid; width: 54px; aspect-ratio: 1; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #dcebd9; color: #245e2b; font-size: 23px; font-weight: 800; }
+.profile-heading h1 { font-size: 24px; }
+.profile-phone { margin: 4px 0 0; color: #59665b; }
+.logout-button { margin-left: auto; padding: 9px 12px; border: 1px solid #c8d3c9; border-radius: 4px; text-decoration: none; }
+.profile-cart { padding-top: 24px; }
+.cart-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 14px; }
+.cart-heading .eyebrow { margin-bottom: 5px; }
+.cart-heading h2 { margin: 0; color: #214f28; font-size: 22px; }
+.cart-count { color: #59665b; font-size: 13px; }
+.cart-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid #e2e9e2; }
+.cart-item h3 { margin: 0; font-size: 16px; }
+.cart-item p { grid-column: 1; margin: 0; color: #59665b; font-size: 14px; }
+.remove-button { grid-column: 2; grid-row: 1 / span 2; padding: 8px 10px; border: 1px solid #c8d3c9; border-radius: 4px; background: #fff; color: #4b584d; cursor: pointer; }
+.empty-cart { margin: 18px 0; color: #59665b; }
+.browse-link { display: inline-block; margin: 16px 0 22px; }
+.whatsapp-order { display: block; }
+footer { padding: 18px 0 0; color: #687568; font-size: 12px; text-align: center; }
+
+@media (max-width: 520px) {
+    .account-layout { width: min(100% - 20px, 920px); padding-top: 16px; }
+    .account-header { margin-bottom: 16px; }
+    .account-brand { font-size: 18px; }
+    .back-link { font-size: 13px; }
+    .account-panel { padding: 22px 18px; }
+    .profile-heading { gap: 10px; }
+    .profile-avatar { width: 44px; font-size: 20px; }
+    .profile-heading h1 { font-size: 19px; }
+    .profile-phone { font-size: 13px; }
+    .logout-button { padding: 8px; font-size: 13px; }
+}

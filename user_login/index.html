@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Login and Profile | Henivet Pharma</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+    <main class="account-layout">
+        <header class="account-header">
+            <a href="../index.html" class="account-brand">Henivet Pharma</a>
+            <a href="../index.html" class="back-link">Back to website</a>
+        </header>
+
+        <section class="account-panel" aria-labelledby="page-title">
+            <div id="login-view">
+                <p class="eyebrow">CUSTOMER ACCOUNT</p>
+                <h1 id="page-title">Login or create your profile</h1>
+                <p class="intro-copy">Sign in with your mobile number. We’ll verify it with a one-time SMS code.</p>
+                <form id="phone-form">
+                    <label for="customer-name">Your name</label>
+                    <input id="customer-name" name="name" type="text" autocomplete="name" maxlength="60" required>
+                    <label for="phone-number">Mobile number</label>
+                    <div class="phone-field">
+                        <span>+91</span>
+                        <input id="phone-number" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" pattern="[0-9]{10}" maxlength="10" placeholder="9876543210" required>
+                    </div>
+                    <small>Enter your 10-digit Indian mobile number.</small>
+                    <div id="recaptcha-container"></div>
+                    <button class="primary-button" id="send-otp" type="submit">Send OTP</button>
+                </form>
+                <form id="otp-form" hidden>
+                    <label for="otp-code">One-time password</label>
+                    <input id="otp-code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required>
+                    <button class="primary-button" id="verify-otp" type="submit">Verify OTP &amp; Login</button>
+                    <button class="text-button" id="change-number" type="button">Change number</button>
+                </form>
+                <p class="status-message" id="login-status" role="status" aria-live="polite"></p>
+            </div>
+
+            <div id="profile-view" hidden>
+                <p class="eyebrow">YOUR ACCOUNT</p>
+                <div class="profile-heading">
+                    <div class="profile-avatar" id="profile-avatar" aria-hidden="true"></div>
+                    <div>
+                        <h1 id="profile-name">Your profile</h1>
+                        <p class="profile-phone" id="profile-phone"></p>
+                    </div>
+                    <button class="text-button logout-button" id="logout-button" type="button">Log out</button>
+                </div>
+
+                <section class="profile-cart" id="cart" aria-labelledby="cart-title">
+                    <div class="cart-heading">
+                        <div>
+                            <p class="eyebrow">YOUR SELECTION</p>
+                            <h2 id="cart-title">Shopping cart</h2>
+                        </div>
+                        <span class="cart-count" id="cart-count">0 items</span>
+                    </div>
+                    <div id="cart-items"></div>
+                    <p class="empty-cart" id="cart-empty">Your cart is empty. Browse products to add medicine.</p>
+                    <a class="browse-link" href="../index.html#products">Browse medicines</a>
+                    <button class="primary-button whatsapp-order" id="cart-order" type="button" disabled>Order cart on WhatsApp</button>
+                    <p class="status-message" id="cart-status" role="status" aria-live="polite"></p>
+                </section>
+            </div>
+        </section>
+        <footer>Henivet Pharma · Secure phone verification</footer>
+    </main>
+    <script type="module" src="account.js"></script>
+</body>
+</html>

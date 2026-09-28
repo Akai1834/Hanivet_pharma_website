@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Login | Henivet Pharma</title>
+    <meta http-equiv="refresh" content="0;url=user_login/index.html">
+    <script>window.location.replace('user_login/index.html');</script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <main class="login-shell">
+        <a class="login-brand" href="index.html">Henivet Pharma</a>
+        <section class="login-panel" aria-labelledby="login-title">
+            <h1 id="login-title">Login with your phone</h1>
+            <p class="login-intro">Enter your Indian mobile number to receive a one-time password.</p>
+
+            <form id="phone-form">
+                <label for="phone-number">Mobile number</label>
+                <div class="phone-input-row">
+                    <span class="country-code" aria-label="India country code">+91</span>
+                    <input
+                        id="phone-number"
+                        name="phone"
+                        type="tel"
+                        inputmode="numeric"
+                        autocomplete="tel-national"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        placeholder="9889501444"
+                        aria-describedby="phone-help"
+                        required
+                    >
+                </div>
+                <small id="phone-help">Enter your 10-digit mobile number.</small>
+                <div id="recaptcha-container"></div>
+                <button class="submit-btn" id="send-otp" type="submit">Send OTP</button>
+            </form>
+
+            <form id="otp-form" hidden>
+                <label for="otp-code">One-time password</label>
+                <input
+                    id="otp-code"
+                    name="otp"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
+                    placeholder="6-digit code"
+                    required
+                >
+                <button class="submit-btn" id="verify-otp" type="submit">Verify OTP &amp; Login</button>
+                <button class="text-button" id="change-number" type="button">Use a different number</button>
+            </form>
+
+            <p class="form-status" id="login-status" role="status" aria-live="polite"></p>
+            <button class="text-button retry-profile" id="retry-profile" type="button" hidden>Retry saving profile</button>
+        </section>
+        <a class="back-to-site" href="index.html">Back to Henivet Pharma</a>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+        import {
+            getAuth,
+            onAuthStateChanged,
+            RecaptchaVerifier,
+            signInWithPhoneNumber
+        } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+        import {
+            doc,
+            getFirestore,
+            serverTimestamp,
+            setDoc
+        } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+        import { firebaseConfig } from './firebase-config.js';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getFirestore(app);
+        const phoneForm = document.getElementById('phone-form');
+        const otpForm = document.getElementById('otp-form');
+        const statusMessage = document.getElementById('login-status');
+        const sendOtpButton = document.getElementById('send-otp');
+        const verifyOtpButton = document.getElementById('verify-otp');
+        const retryProfileButton = document.getElementById('retry-profile');
+        let confirmationResult = null;
+        let recaptchaVerifier = null;
+        let recaptchaReady = null;
+        let recaptchaWidgetId = null;
+        let profileSaveInProgress = false;
+        let firstAuthStateHandled = false;
+
+        function showStatus(message, isError = false) {
+            statusMessage.textContent = message;
+            statusMessage.dataset.error = String(isError);
+        }
+
+        function setBusy(isBusy) {
+            sendOtpButton.disabled = isBusy;
+            verifyOtpButton.disabled = isBusy;
+        }
+
+        function prepareRecaptcha() {
+            if (recaptchaReady) return recaptchaReady;
+            document.getElementById('recaptcha-container').replaceChildren();
+            recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+                size: 'normal'
+            });
+            recaptchaReady = recaptchaVerifier.render().then(widgetId => {
+                recaptchaWidgetId = widgetId;
+            }).catch(error => {
+                recaptchaReady = null;
+                recaptchaVerifier = null;
+                throw error;
+            });
+            return recaptchaReady;
+        }
+
+        async function saveProfileAndContinue(user) {
+            if (profileSaveInProgress) return;
+            profileSaveInProgress = true;
+            retryProfileButton.hidden = true;
+            showStatus('Login verified. Saving your account securely...');
+            try {
+                await setDoc(doc(database, 'users', user.uid), {
+                    phoneNumber: user.phoneNumber,
+                    loginTime: serverTimestamp()
+                }, { merge: true });
+                const product = new URLSearchParams(window.location.search).get('product');
+                const destination = product
+                    ? `index.html?product=${encodeURIComponent(product)}`
+                    : 'index.html';
+                window.location.replace(destination);
+            } catch (error) {
+                profileSaveInProgress = false;
+                retryProfileButton.hidden = false;
+                showStatus('Login succeeded, but your profile could not be saved. Check your connection and retry.', true);
+                console.error('Firestore profile save failed', error);
+            }
+        }
+
+        onAuthStateChanged(auth, user => {
+            if (firstAuthStateHandled) return;
+            firstAuthStateHandled = true;
+            if (user) void saveProfileAndContinue(user);
+        });
+
+        phoneForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            const digits = document.getElementById('phone-number').value.trim();
+            if (!/^\d{10}$/.test(digits)) {
+                showStatus('Enter a valid 10-digit Indian mobile number.', true);
+                return;
+            }
+
+            setBusy(true);
+            showStatus('Verifying the security check...');
+            try {
+                await prepareRecaptcha();
+                confirmationResult = await signInWithPhoneNumber(auth, `+91${digits}`, recaptchaVerifier);
+                phoneForm.hidden = true;
+                otpForm.hidden = false;
+                document.getElementById('otp-code').focus();
+                showStatus('OTP sent to +91 ' + digits + '.');
+            } catch (error) {
+                showStatus(error.message || 'Could not send the OTP. Please try again.', true);
+                if (recaptchaWidgetId !== null && window.grecaptcha) {
+                    window.grecaptcha.reset(recaptchaWidgetId);
+                }
+            } finally {
+                setBusy(false);
+            }
+        });
+
+        otpForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            if (!confirmationResult) {
+                showStatus('Send an OTP first.', true);
+                return;
+            }
+
+            const code = document.getElementById('otp-code').value.trim();
+            if (!/^\d{6}$/.test(code)) {
+                showStatus('Enter the 6-digit code from your SMS.', true);
+                return;
+            }
+
+            setBusy(true);
+            showStatus('Verifying your OTP...');
+            try {
+                const credential = await confirmationResult.confirm(code);
+                await saveProfileAndContinue(credential.user);
+            } catch (error) {
+                showStatus(error.message || 'OTP verification failed. Check the code and try again.', true);
+            } finally {
+                setBusy(false);
+            }
+        });
+
+        document.getElementById('change-number').addEventListener('click', () => {
+            confirmationResult = null;
+            otpForm.reset();
+            otpForm.hidden = true;
+            phoneForm.hidden = false;
+            showStatus('');
+            document.getElementById('phone-number').focus();
+        });
+
+        retryProfileButton.addEventListener('click', () => {
+            if (auth.currentUser) void saveProfileAndContinue(auth.currentUser);
+        });
+
+        void prepareRecaptcha().catch(error => {
+            showStatus(error.message || 'Could not load reCAPTCHA. Check Firebase authorized domains and reload.', true);
+        });
+    </script>
+</body>
+</html>
