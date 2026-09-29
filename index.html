@@ -11,6 +11,30 @@
     <meta property="og:title" content="Henivet Pharma - Animal Healthcare">
     <meta property="og:description" content="Browse animal healthcare products from Henivet Pharma.">
     <meta property="og:url" content="https://henivetpharma.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <script>
+        tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        colors: {
+                            forest: '#174b38',
+                            leaf: '#4d8a61',
+                            mint: '#edf5ef',
+                            ink: '#17251e'
+                        },
+                        fontFamily: {
+                            sans: ['DM Sans', 'sans-serif'],
+                            display: ['Fraunces', 'serif']
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -23,7 +47,7 @@
     </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="min-h-screen font-sans antialiased">
     <!-- Header with Contact Buttons -->
     <div class="header">
         <div class="header-content">
