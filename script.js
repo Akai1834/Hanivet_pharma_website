@@ -490,7 +490,12 @@ function addCustomerReview(review, reviewsGrid) {
 
     const stars = document.createElement('div');
     stars.className = 'review-stars';
-    stars.textContent = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    for (let starIndex = 0; starIndex < 5; starIndex += 1) {
+        const star = document.createElement('span');
+        star.textContent = '⭐';
+        if (starIndex >= review.rating) star.className = 'review-stars-empty';
+        stars.append(star);
+    }
 
     const message = document.createElement('p');
     message.className = 'review-text';

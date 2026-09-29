@@ -113,6 +113,12 @@ function processDestination(user, newlySignedIn = false) {
         window.location.replace(`../index.html?product=${encodeURIComponent(productName)}&action=direct`);
         return;
     }
+    const action = parameters.get('action');
+    if (action === 'review' || action === 'order') {
+        const destination = action === 'review' ? 'reviews' : 'contact';
+        window.location.replace(`../index.html?action=${action}#${destination}`);
+        return;
+    }
     if (newlySignedIn) {
         window.location.replace('../index.html');
         return;
