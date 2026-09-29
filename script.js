@@ -479,9 +479,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!review.name || !review.message) return;
 
         document.dispatchEvent(new CustomEvent('henivet:review-submit', { detail: review }));
-        reviewForm.reset();
-        reviewForm.hidden = true;
-        reviewToggle.setAttribute('aria-expanded', 'false');
     });
     
     console.log('Henivet Pharma website loaded successfully!');

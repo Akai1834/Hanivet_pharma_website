@@ -232,6 +232,9 @@ document.getElementById('review-form').addEventListener('submit', event => {
 
 document.addEventListener('henivet:review-submit', async event => {
     if (!currentUser) return;
+    const reviewForm = document.getElementById('review-form');
+    const submitButton = reviewForm.querySelector('[type="submit"]');
+    submitButton.disabled = true;
     try {
         await addDoc(collection(database, 'reviews'), {
             uid: currentUser.uid,
@@ -241,9 +244,14 @@ document.addEventListener('henivet:review-submit', async event => {
             createdAt: serverTimestamp()
         });
         addCustomerReview(event.detail, document.querySelector('.reviews-grid'));
+        reviewForm.reset();
+        reviewForm.hidden = true;
+        document.getElementById('review-toggle').setAttribute('aria-expanded', 'false');
     } catch (error) {
         window.alert('Your review could not be saved. Please try again.');
         console.error('Firebase review save failed', error);
+    } finally {
+        submitButton.disabled = false;
     }
 });
 
