@@ -94,9 +94,9 @@ const translations = {
         contact_title: 'Contact Us / Order Medicine',
         contact_subtitle: 'To order medicine or get advice, contact us directly.',
         contact_phone_title: '📞 Phone',
-        contact_phone: 'Call: +91-9876543210',
+        contact_phone: 'Call: +91-9889501444',
         contact_whatsapp_title: '💬 WhatsApp',
-        contact_whatsapp: 'WhatsApp: +91-9876543210',
+        contact_whatsapp: 'WhatsApp: +91 9889501444',
         contact_email_title: '📩 Email',
         contact_email: 'henivetpharma@gmail.com',
         contact_form_title: 'Send us a Message',
@@ -113,7 +113,7 @@ const translations = {
         footer_brand: '🐾 Henivet Pharma',
         footer_tagline: 'Natural Animal Homeopathy',
         footer_contact_title: '📞 Contact Info',
-        footer_phone: 'Phone: +91-9876543210',
+        footer_phone: 'Phone: +91-9889501444',
         footer_email: 'Email: henivetpharma@gmail.com',
         footer_whatsapp_link: '💬 Follow us on WhatsApp',
         footer_serve_title: '🐄 We Serve',
@@ -260,9 +260,9 @@ const translations = {
         contact_title: 'संपर्क करें / दवा ऑर्डर करें',
         contact_subtitle: 'दवा ऑर्डर करने या सलाह लेने के लिए सीधे हमसे संपर्क करें।',
         contact_phone_title: '📞 फोन',
-        contact_phone: 'कॉल करें: +91-9876543210',
+        contact_phone: 'कॉल करें: +91-9889501444',
         contact_whatsapp_title: '💬 व्हाट्सएप',
-        contact_whatsapp: 'व्हाट्सएप: +91-9876543210',
+        contact_whatsapp: 'व्हाट्सएप: +91 9889501444',
         contact_email_title: '📩 ईमेल',
         contact_email: 'henivetpharma@gmail.com',
         contact_form_title: 'हमें संदेश भेजें',
@@ -279,7 +279,7 @@ const translations = {
         footer_brand: '🐾 हेनिवेट फार्मा',
         footer_tagline: 'प्राकृतिक पशु होम्योपैथी',
         footer_contact_title: '📞 संपर्क जानकारी',
-        footer_phone: 'फोन: +91-9876543210',
+        footer_phone: 'फोन: +91-9889501444',
         footer_email: 'ईमेल: henivetpharma@gmail.com',
         footer_whatsapp_link: '💬 व्हाट्सएप पर फॉलो करें',
         footer_serve_title: '🐄 हम सेवा करते हैं',
@@ -409,7 +409,7 @@ function handleFormSubmit(event) {
     
     // Create WhatsApp message
     const message = `Hello Henivet Pharma!\n\nName: ${name}\nPhone: ${phone}\nAnimal Type: ${animal}\nProblem: ${problem}`;
-    const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/919889501444?text=${encodeURIComponent(message)}`;
     
     // Open WhatsApp
     window.open(whatsappUrl, '_blank');
