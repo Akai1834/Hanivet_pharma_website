@@ -71,6 +71,7 @@
         } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
         import {
             doc,
+            getDoc,
             getFirestore,
             serverTimestamp,
             setDoc
@@ -92,6 +93,80 @@
         let recaptchaWidgetId = null;
         let profileSaveInProgress = false;
         let firstAuthStateHandled = false;
+        const DAILY_LOGIN_LIMIT = 10;
+        const DAILY_LOGIN_STORAGE_KEY = 'henivet_daily_login_limit';
+
+        function getTodayKey() {
+            return new Date().toISOString().slice(0, 10);
+        }
+
+        function readLocalLoginLimitState() {
+            try {
+                const raw = JSON.parse(localStorage.getItem(DAILY_LOGIN_STORAGE_KEY) || '{}');
+                const todayKey = getTodayKey();
+                const count = Number(raw.dateKey === todayKey ? raw.count || 0 : 0);
+                return { dateKey: todayKey, count: Number.isFinite(count) ? count : 0 };
+            } catch {
+                return { dateKey: getTodayKey(), count: 0 };
+            }
+        }
+
+        function writeLocalLoginLimitState(state) {
+            localStorage.setItem(DAILY_LOGIN_STORAGE_KEY, JSON.stringify({
+                dateKey: state.dateKey || getTodayKey(),
+                count: Number.isFinite(Number(state.count)) ? Number(state.count) : 0
+            }));
+        }
+
+        async function getDailyLoginState() {
+            const todayKey = getTodayKey();
+            const localState = readLocalLoginLimitState();
+            let count = localState.dateKey === todayKey ? localState.count : 0;
+
+            try {
+                const snapshot = await getDoc(doc(database, 'dailyLoginLimits', todayKey));
+                if (snapshot.exists()) {
+                    count = Math.max(count, Number(snapshot.data().count || 0));
+                }
+            } catch (error) {
+                console.warn('Could not read daily login limit from Firestore.', error);
+            }
+
+            return { dateKey: todayKey, count };
+        }
+
+        async function markDailyLoginAttempt() {
+            const todayKey = getTodayKey();
+            const localState = readLocalLoginLimitState();
+            const nextCount = localState.dateKey === todayKey ? localState.count + 1 : 1;
+            writeLocalLoginLimitState({ dateKey: todayKey, count: nextCount });
+
+            try {
+                const limitRef = doc(database, 'dailyLoginLimits', todayKey);
+                const snapshot = await getDoc(limitRef);
+                const currentCount = snapshot.exists() ? Number(snapshot.data().count || 0) : 0;
+                await setDoc(limitRef, { dateKey: todayKey, count: currentCount + 1 }, { merge: true });
+            } catch (error) {
+                console.warn('Could not sync daily login limit to Firestore.', error);
+            }
+        }
+
+        async function isLoginBlockedForToday() {
+            const state = await getDailyLoginState();
+            return state.count >= DAILY_LOGIN_LIMIT;
+        }
+
+        function disableLoginInterface(message = 'Today login exceeded. Please try tomorrow.') {
+            sendOtpButton.disabled = true;
+            verifyOtpButton.disabled = true;
+            phoneForm.querySelectorAll('input, button').forEach(element => {
+                element.disabled = true;
+            });
+            otpForm.querySelectorAll('input, button').forEach(element => {
+                element.disabled = true;
+            });
+            showStatus(message, true);
+        }
 
         function showStatus(message, isError = false) {
             statusMessage.textContent = message;
@@ -150,6 +225,12 @@
 
         phoneForm.addEventListener('submit', async event => {
             event.preventDefault();
+
+            if (await isLoginBlockedForToday()) {
+                disableLoginInterface();
+                return;
+            }
+
             const digits = document.getElementById('phone-number').value.trim();
             if (!/^\d{10}$/.test(digits)) {
                 showStatus('Enter a valid 10-digit Indian mobile number.', true);
@@ -161,6 +242,7 @@
             try {
                 await prepareRecaptcha();
                 confirmationResult = await signInWithPhoneNumber(auth, `+91${digits}`, recaptchaVerifier);
+                await markDailyLoginAttempt();
                 phoneForm.hidden = true;
                 otpForm.hidden = false;
                 document.getElementById('otp-code').focus();
@@ -216,6 +298,12 @@
         void prepareRecaptcha().catch(error => {
             showStatus(error.message || 'Could not load reCAPTCHA. Check Firebase authorized domains and reload.', true);
         });
+
+        (async () => {
+            if (await isLoginBlockedForToday()) {
+                disableLoginInterface();
+            }
+        })();
     </script>
 </body>
 </html>
